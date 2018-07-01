@@ -3,7 +3,7 @@ package com.costular.marvelheroes.repository
 import com.costular.marvelheroes.data.model.MarvelHero
 import com.costular.marvelheroes.data.model.mapper.MarvelHeroMapper
 import com.costular.marvelheroes.data.repository.MarvelHeroesRepositoryImpl
-import com.costular.marvelheroes.data.repository.datasource.RemoteMarvelHeroesDataSource
+import com.costular.marvelheroes.data.repository.datasource.APIMarvelHeroesDataSourceMVVM
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
@@ -16,7 +16,7 @@ import org.junit.Test
  */
 class MarvelHeroesRepositoryTest {
 
-    private val mockRemoteDataSource: RemoteMarvelHeroesDataSource = mock()
+    private val mockAPIDataSourceMVVM: APIMarvelHeroesDataSourceMVVM = mock()
 
     private lateinit var mapper: MarvelHeroMapper
     private lateinit var marvelHeroesRepository: MarvelHeroesRepositoryImpl
@@ -24,18 +24,18 @@ class MarvelHeroesRepositoryTest {
     @Before
     fun setUp() {
         mapper = MarvelHeroMapper()
-        marvelHeroesRepository = MarvelHeroesRepositoryImpl(mockRemoteDataSource, mapper)
+        marvelHeroesRepository = MarvelHeroesRepositoryImpl(mockAPIDataSourceMVVM, mapper)
     }
 
     @Test
     fun `repository should retrieve marvel heroes list`() {
         val heroes = listOf(MarvelHero("Iron Man"), MarvelHero("Spider-Man"))
         val observable = Observable.just(heroes)
-        whenever(mockRemoteDataSource.getMarvelHeroesList()).thenReturn(observable)
+        whenever(mockAPIDataSourceMVVM.getMarvelHeroesList()).thenReturn(observable)
 
         val result = marvelHeroesRepository.getMarvelHeroesList()
 
-        verify(mockRemoteDataSource).getMarvelHeroesList()
+        verify(mockAPIDataSourceMVVM).getMarvelHeroesList()
 
         result.test()
                 .assertValue { it.size == 2 }

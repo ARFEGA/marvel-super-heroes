@@ -20,16 +20,20 @@ class NetModule {
     @Provides
     @Singleton
     fun provideRetrofit(): Retrofit {
-        val client =
+
+       val client =
                 OkHttpClient.Builder()
+                        //Inercepta la llamada y logea todo_ lo que tiene que ver con body.
                         .addInterceptor(HttpLoggingInterceptor().apply {
                             level = HttpLoggingInterceptor.Level.BODY
                         })
                         .build()
+                        //Se pueden medir otro intercepto, como por ejemplo enviar token en cabecera.
 
         return Retrofit.Builder()
                 .baseUrl(BuildConfig.API_URL)
-                .client(client)
+                .client(client)//EL CLIENTE OKHTTP, ES EL QUE GESTIONA LA LLAMADA POR DEBAJO DE RETROFIT
+                                //SI NO LO INDICAMOS, RETROFIT, CREA UNO PROPIO POR DEFECTO
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()

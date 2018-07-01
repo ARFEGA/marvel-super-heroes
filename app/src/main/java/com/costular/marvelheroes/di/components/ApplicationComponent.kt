@@ -17,9 +17,9 @@ import javax.inject.Singleton
 @Component(modules = [ApplicationModule::class, NetModule::class, DataModule::class])
 interface ApplicationComponent {
 
-    fun getContext(): Context
+    /*fun getContext(): Context
     fun getRepository(): MarvelHeroesRepositoryImpl
     fun getHeroService(): MarvelHeroesService
-    fun getNavigator(): Navigator
+    fun getNavigator(): Navigator*/
 
 }

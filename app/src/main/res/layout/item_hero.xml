@@ -9,7 +9,7 @@
     android:foreground="?attr/selectableItemBackground">
 
     <com.costular.marvelheroes.presentation.util.SquareImageView
-        android:id="@+id/heroImage"
+        android:id="@+id/heroImage_MVVM"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="centerCrop"

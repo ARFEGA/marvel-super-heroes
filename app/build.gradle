@@ -17,7 +17,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         buildConfigField "String", "API_URL", "\"https://api.myjson.com/bins/bvyob/\""
-
+        //Para utilizar @Parcelize entre otras
         androidExtensions {
             experimental = true
         }
@@ -33,13 +33,18 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:27.1.0'
-    implementation 'com.android.support:recyclerview-v7:27.1.0'
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
+    implementation "com.android.support:design:27.1.1"
+    implementation "android.arch.lifecycle:extensions:1.1.1"
+
+
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 
 
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
@@ -51,7 +56,7 @@ dependencies {
     //annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
     kapt 'com.github.bumptech.glide:compiler:4.6.1'
     implementation 'androidx.core:core-ktx:0.2'
-    implementation 'com.android.support:palette-v7:27.1.0'
+    implementation 'com.android.support:palette-v7:27.1.1'
 
     kapt 'com.google.dagger:dagger-compiler:2.13'
     implementation 'com.google.dagger:dagger:2.13'
@@ -66,4 +71,26 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:3.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-intents:3.0.1'
+
+
+
+    //Para poder revisar la información almacenada en el dispositivo, lanzamos en modo
+    // debugear.
+    //En la clase que inicia la app hay que añadir adicionalmente:
+    // Stetho.initializeWithDefaults(this)
+    //Seguidamente implementamos y desde chrome en la dirección chrome://inspect/devices podemos revisar
+    //Aparecerá el terminal, ya sea físico o emulador y pinchando en inspect, podremos ver los datos
+    implementation 'com.facebook.stetho:stetho:1.5.0'
+
+
+    //Para trabajar con jetPack Room  (datos)
+    def room_version = "1.1.0" // or, for latest rc, use "1.1.1-rc1"
+
+    implementation "android.arch.persistence.room:runtime:$room_version"
+    annotationProcessor "android.arch.persistence.room:compiler:$room_version"
+    kapt "android.arch.persistence.room:compiler:$room_version"
+
+    // optional - RxJava support for Room
+    implementation "android.arch.persistence.room:rxjava2:$room_version"
+
 }

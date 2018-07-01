@@ -22,8 +22,8 @@ class ApplicationModule(private val application: MainApp) {
     @Singleton
     fun provideContext(): Context = application.applicationContext
 
-    @Provides
-    @Singleton
-    fun provideNavigator(): Navigator = Navigator()
+   // @Provides
+    //@Singleton
+    //fun provideNavigator(): Navigator = Navigator()
 
 }

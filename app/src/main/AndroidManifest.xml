@@ -12,15 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name=".presentation.MainApp">
-
-        <activity android:name=".presentation.heroeslist.HeroesListActivity">
+        <activity android:name=".presentation.heroeslist.HeroesListActivityMVVM">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.heroedetail.MarvelHeroeDetailActivity" />
+        <activity android:name=".presentation.heroedetail.MarvelHeroDetailActivityMVVM" />
     </application>
 
 </manifest>
