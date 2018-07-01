@@ -19,7 +19,7 @@ class LocalMarvelHeroesDataSourceMVVM(private val heroesDB : HeroesDataBase):Mar
     fun saveHeroes(heroes:List<MarvelHeroEntity>){
         //En segundo plano siempre el insert
         Observable.fromCallable{
-            heroesDB.getHeroesDAO().insertAll(heroes)
+            heroesDB.getHeroesDAO().removeAndInsertHeroes(heroes)
         }
                 .subscribeOn(Schedulers.io())
                 .subscribe()

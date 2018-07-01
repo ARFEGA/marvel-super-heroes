@@ -46,7 +46,6 @@ object Inject {
 
     fun initDB(context: Context){
         db = Room.databaseBuilder(context,HeroesDataBase::class.java,"heroes.db")
-                //.disableMigrationsChecking()
                 .fallbackToDestructiveMigration()  //.addMigrations(Migration(1,3))
                 .build()
         localDataSourceMVVM = LocalMarvelHeroesDataSourceMVVM(db)
