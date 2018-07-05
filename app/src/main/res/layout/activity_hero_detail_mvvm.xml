@@ -1,57 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        xmlns:tools="http://schemas.android.com/tools"
         android:paddingBottom="16dp">
+<android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-        <ImageView
+    <ImageView
             android:id="@+id/heroDetailImage_mvvm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_above="@id/favorite"
             android:transitionName="@string/image_transition" />
+
+    <ImageView
+        android:id="@+id/favorite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/heroDetailImage_mvvm"
+        android:layout_alignRight="@id/heroDetailImage_mvvm"
+        android:layout_gravity="center"
+        android:adjustViewBounds="false"
+        android:baseline="@android:dimen/thumbnail_height"
+        android:clickable="true"
+        android:contentDescription="Apply favorite"
+        android:cropToPadding="false"
+        android:focusable="true"
+        android:scaleType="center"
+        android:visibility="visible"
+        app:srcCompat="@drawable/no_favorite" />
+</android.support.constraint.ConstraintLayout>
+
+
 
         <TextView
             android:id="@+id/heroDetailName_mvvm"
+            style="@style/HeroDetailName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Iron Man"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            style="@style/HeroDetailName" />
+            tools:text="Iron Man" />
 
         <TextView
             android:id="@+id/heroDetailRealName_mvvm"
+            style="@style/HeroDetailRealName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Anthony Edward 'Tony' Stark"
-            style="@style/HeroDetailRealName" />
+            tools:text="Anthony Edward 'Tony' Stark" />
 
         <TextView
             android:id="@+id/heroDetailHeight_mvvm"
+            style="@style/HeroDetailHeight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/HeroDetailHeight"
             tools:text="1.85m" />
 
         <TextView
             android:id="@+id/heroDetailPower_mvvm"
+            style="@style/HeroDetailPower"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/HeroDetailPower"
             tools:text="None; Tony's body had been enhanced by the modified techno-organic virus, Extremis, but it is currently inaccessible and inoperable." />
 
         <TextView
             android:id="@+id/heroDetailAbilities_mvvm"
+            style="@style/HeroDetailAbilities"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/HeroDetailAbilities"
             tools:text="Tony has a genius level intellect that allows him to invent a wide range of sophisticated devices, specializing in advanced weapons and armor. He possesses a keen business mind." />
 
     </LinearLayout>

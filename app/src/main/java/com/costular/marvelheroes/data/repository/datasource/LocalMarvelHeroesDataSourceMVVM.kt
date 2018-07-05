@@ -5,11 +5,18 @@ import com.costular.marvelheroes.data.model.MarvelHero
 import com.costular.marvelheroes.data.repository.MarvelHeroesRepository
 import com.costular.marvelheroes.domain.model.MarvelHeroEntity
 import io.reactivex.Flowable
+import io.reactivex.Maybe
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.schedulers.Schedulers
 
 class LocalMarvelHeroesDataSourceMVVM(private val heroesDB : HeroesDataBase):MarvelHeroesRepository {
+
+    override fun getMarvelHeroDetail(name: String): Maybe<MarvelHeroEntity> {
+        return heroesDB.getHeroesDAO()
+                .getFavoriteState(name)
+    }
+
     override fun getMarvelHeroesList(): Flowable<List<MarvelHeroEntity>> {
             return heroesDB
                     .getHeroesDAO()
@@ -25,6 +32,14 @@ class LocalMarvelHeroesDataSourceMVVM(private val heroesDB : HeroesDataBase):Mar
                 .subscribe()
     }
 
+    fun updateHeroFavorite(name:String,isFavorite:Boolean){
+        Observable.fromCallable{
+            heroesDB.getHeroesDAO().update(isFavorite,name)
+        }
+                .subscribeOn(Schedulers.io())
+                .subscribe()
     }
+
+}
 
 

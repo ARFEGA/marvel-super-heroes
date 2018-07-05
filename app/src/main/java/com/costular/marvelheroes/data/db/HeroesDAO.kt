@@ -17,6 +17,12 @@ abstract class HeroesDAO {
     @Query("DELETE FROM heroes")
     abstract fun deleteAllHeroes()
 
+    @Query("select * from heroes where name= :name")
+    abstract fun getFavoriteState(name:String):Maybe<MarvelHeroEntity>
+
+    @Query("UPDATE heroes SET favorite=:newFavoriteValue WHERE name = :name")
+    abstract fun update(newFavoriteValue : Boolean, name:String)
+
     @Transaction
     open fun removeAndInsertHeroes(heroes:List<MarvelHeroEntity>){
         deleteAllHeroes()

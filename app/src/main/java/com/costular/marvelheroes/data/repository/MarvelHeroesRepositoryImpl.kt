@@ -6,6 +6,7 @@ import com.costular.marvelheroes.data.repository.datasource.LocalMarvelHeroesDat
 import com.costular.marvelheroes.data.repository.datasource.MarvelHeroesDataSource
 import com.costular.marvelheroes.domain.model.MarvelHeroEntity
 import io.reactivex.Flowable
+import io.reactivex.Maybe
 import io.reactivex.Observable
 import org.intellij.lang.annotations.Flow
 
@@ -19,24 +20,24 @@ class MarvelHeroesRepositoryImpl(private val localDataSource : LocalMarvelHeroes
 
     override fun getMarvelHeroesList(): Flowable<List<MarvelHeroEntity>> =
             getHeroesFromDB()
-                    .concatWith (
+                    .concatWith(
                             getHeroesFromAPI()
-                        )
+                    )
 
-    private fun getHeroesFromDB():Flowable<List<MarvelHeroEntity>> = localDataSource.getMarvelHeroesList()
+    private fun getHeroesFromDB(): Flowable<List<MarvelHeroEntity>> = localDataSource.getMarvelHeroesList()
 
-    private fun getHeroesFromAPI() : Flowable<List<MarvelHeroEntity>> =
-            apiMarvelHeroesDataSource.
-                    getMarvelHeroesList()
+    private fun getHeroesFromAPI(): Flowable<List<MarvelHeroEntity>> =
+            apiMarvelHeroesDataSource.getMarvelHeroesList()
                     .map { marvelHeroesMapper.transformList(it) }
                     .doOnNext { localDataSource.saveHeroes(it) }
 
 
+    private fun updateHeroRow(name:String,isFavorite:Boolean){
+        localDataSource.updateHeroFavorite(name,isFavorite)
+    }
 
 
-   /* override fun getMarvelHeroDetail(heroID : Long): Observable<MarvelHeroEntity> =
-            fakeMarvelHeroesDataSource
-                    .getHeroDetail(34)*/
-
-
+   override fun getMarvelHeroDetail(name: String ): Maybe<MarvelHeroEntity> =
+            localDataSource
+                    .getMarvelHeroDetail(name)
 }

@@ -6,6 +6,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.costular.marvelheroes.R
@@ -40,7 +41,7 @@ class HeroesListActivityMVVM : AppCompatActivity(){
 
     private fun setUpRecycler(){
         adapter = HeroesListAdapterMVVM{ hero, image -> goToHeroDetail(hero, image) }
-        heroesListRecycler_mvvm.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
+        heroesListRecycler_mvvm.layoutManager = GridLayoutManager(this,2,GridLayoutManager.VERTICAL,false)
         heroesListRecycler_mvvm.itemAnimator = DefaultItemAnimator()
         heroesListRecycler_mvvm.adapter = adapter
     }
@@ -82,6 +83,11 @@ class HeroesListActivityMVVM : AppCompatActivity(){
        /* val intent = Intent(this,MarvelHeroDetailActivityMVVM::class.java)
         intent.putExtra(MarvelHeroDetailActivityMVVM.PARAM_HERO_ID,hero.name)//Debeo pasar el id, pero por el momento el nombre
         startActivity(intent)*/
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setUpViewModel()
     }
 
 
