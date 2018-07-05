@@ -49,7 +49,7 @@ object Inject {
                 .fallbackToDestructiveMigration()  //.addMigrations(Migration(1,3))
                 .build()
         localDataSourceMVVM = LocalMarvelHeroesDataSourceMVVM(db)
-        marvelHeroesRepository = MarvelHeroesRepositoryImpl(localDataSourceMVVM, apiDataSource,marvelHeroMapper)
+        marvelHeroesRepository = MarvelHeroesRepositoryImpl(localDataSourceMVVM, apiDataSource,marvelHeroMapper, settingsManager)
 
 
 

@@ -19,8 +19,9 @@ class MainApp : Application() {
     override fun onCreate() {
         super.onCreate()
         Stetho.initializeWithDefaults(this)
-        Inject.initDB(this)
         Inject.settingsManager = SettingsManager(PreferenceManager.getDefaultSharedPreferences(this))
+        Inject.initDB(this)
+
     }
 //    val component: ApplicationComponent by lazy {
 //        DaggerApplicationComponent.builder()

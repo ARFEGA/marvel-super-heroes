@@ -5,6 +5,7 @@ import com.costular.marvelheroes.data.repository.datasource.APIMarvelHeroesDataS
 import com.costular.marvelheroes.data.repository.datasource.LocalMarvelHeroesDataSourceMVVM
 import com.costular.marvelheroes.data.repository.datasource.MarvelHeroesDataSource
 import com.costular.marvelheroes.domain.model.MarvelHeroEntity
+import com.costular.marvelheroes.presentation.util.SettingsManager
 import io.reactivex.Flowable
 import io.reactivex.Maybe
 import io.reactivex.Observable
@@ -15,14 +16,18 @@ import org.intellij.lang.annotations.Flow
  */
 class MarvelHeroesRepositoryImpl(private val localDataSource : LocalMarvelHeroesDataSourceMVVM,
                                  private val apiMarvelHeroesDataSource:APIMarvelHeroesDataSourceMVVM,
-                                 private val marvelHeroesMapper: MarvelHeroMapper)
+                                 private val marvelHeroesMapper: MarvelHeroMapper,
+                                 private val settingsManager: SettingsManager)
     : MarvelHeroesRepository {
 
     override fun getMarvelHeroesList(): Flowable<List<MarvelHeroEntity>> =
+        if(settingsManager.isFirstLoadHeroes) {
             getHeroesFromDB()
                     .concatWith(
                             getHeroesFromAPI()
                     )
+        } else getHeroesFromDB()
+
 
     private fun getHeroesFromDB(): Flowable<List<MarvelHeroEntity>> = localDataSource.getMarvelHeroesList()
 

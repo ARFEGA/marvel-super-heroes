@@ -10,7 +10,7 @@ class SettingsManager(val sharedPreferences:SharedPreferences) {
 
 
     var isFirstLoadHeroes : Boolean
-    get() = sharedPreferences.getBoolean(FIRST_LOAD_HEROES,false)
+    get() = sharedPreferences.getBoolean(FIRST_LOAD_HEROES,true)
     set(value) {
         sharedPreferences
                 .edit()
