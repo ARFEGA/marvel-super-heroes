@@ -10,7 +10,7 @@ import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.schedulers.Schedulers
 
-class LocalMarvelHeroesDataSourceMVVM(private val heroesDB : HeroesDataBase):MarvelHeroesRepository {
+class LocalMarvelHeroesDataSourceMVVM(private val heroesDB : HeroesDataBase):LocalMarvelHeroesDataSource {
 
     override fun getMarvelHeroDetail(name: String): Maybe<MarvelHeroEntity> {
         return heroesDB.getHeroesDAO()
@@ -23,7 +23,7 @@ class LocalMarvelHeroesDataSourceMVVM(private val heroesDB : HeroesDataBase):Mar
                     .getAllHeroes()
                     .toFlowable()
         }
-    fun saveHeroes(heroes:List<MarvelHeroEntity>){
+    override fun saveHeroes(heroes:List<MarvelHeroEntity>){
         //En segundo plano siempre el insert
         Observable.fromCallable{
             heroesDB.getHeroesDAO().removeAndInsertHeroes(heroes)
@@ -32,7 +32,7 @@ class LocalMarvelHeroesDataSourceMVVM(private val heroesDB : HeroesDataBase):Mar
                 .subscribe()
     }
 
-    fun updateHeroFavorite(name:String,isFavorite:Boolean){
+    override fun updateHeroFavorite(name:String,isFavorite:Boolean){
         Observable.fromCallable{
             heroesDB.getHeroesDAO().update(isFavorite,name)
         }

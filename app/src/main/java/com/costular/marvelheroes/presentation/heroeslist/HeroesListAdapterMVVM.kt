@@ -46,10 +46,6 @@ class  HeroesListAdapterMVVM(val onUserClick: OnUserClick) : RecyclerView.Adapte
                 Glide.with(heroImage_MVVM)
                         .load(marvelHeroEntity.photoUrl)
                         .into(heroImage_MVVM)
-
-                //Me invento una imagen que todavía no está inicializada, por problemas en la utilización de heroImage
-                //lateinit var imageView : ImageView
-                //De estq forma
                 setOnClickListener { onUserClick(marvelHeroEntity, heroImage_MVVM) }
                 //ó de eta forma
                 //itemView.setOnClickListener { onUserClick.invoke(items[adapterPosition],imageView) }

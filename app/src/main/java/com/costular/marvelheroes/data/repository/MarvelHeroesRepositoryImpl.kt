@@ -32,7 +32,7 @@ class MarvelHeroesRepositoryImpl(private val localDataSource : LocalMarvelHeroes
                     .doOnNext { localDataSource.saveHeroes(it) }
 
 
-    private fun updateHeroRow(name:String,isFavorite:Boolean){
+    override fun updateHeroRow(name:String,isFavorite:Boolean){
         localDataSource.updateHeroFavorite(name,isFavorite)
     }
 

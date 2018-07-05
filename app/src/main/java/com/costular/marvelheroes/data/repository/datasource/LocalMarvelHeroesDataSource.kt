@@ -1,17 +1,16 @@
-package com.costular.marvelheroes.data.repository
+package com.costular.marvelheroes.data.repository.datasource
 
 import com.costular.marvelheroes.domain.model.MarvelHeroEntity
 import io.reactivex.Flowable
 import io.reactivex.Maybe
-import io.reactivex.Observable
 
-/**
- * Created by costular on 17/03/2018.
- */
-interface MarvelHeroesRepository {
+interface LocalMarvelHeroesDataSource {
 
     fun getMarvelHeroesList(): Flowable<List<MarvelHeroEntity>>
     fun getMarvelHeroDetail(name: String) : Maybe<MarvelHeroEntity>
-    fun updateHeroRow(name:String,isFavorite:Boolean)
+    fun saveHeroes(heroes:List<MarvelHeroEntity>)
+    fun updateHeroFavorite(name:String,isFavorite:Boolean)
+
+
 
 }

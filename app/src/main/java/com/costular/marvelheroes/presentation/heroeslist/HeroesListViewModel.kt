@@ -12,18 +12,12 @@ import io.reactivex.schedulers.Schedulers
 
 class HeroesListViewModel: BaseViewModel() {//En BaseViewModel, implementamos CompositeDisposable
 
-
-
-
     //JetPack
     val heroesListState : MutableLiveData<List<MarvelHeroEntity>> = MutableLiveData()
     val isLoadingState : MutableLiveData<Boolean> = MutableLiveData()
     //RxJava
     //val heroesListState : PublishSubject<List<MarvelHeroEntity>> = PublishSubject.create()
     //val isLoadingState : PublishSubject<Boolean> = PublishSubject()
-
-
-
 
     fun loadHeroesList(){
         Inject.marvelHeroesRepository.getMarvelHeroesList()

@@ -21,15 +21,8 @@ import kotlinx.android.synthetic.main.activity_main_mvvm.*
 
 class HeroesListActivityMVVM : AppCompatActivity(){
 
-
-
-
     lateinit var heroesListViewModel: HeroesListViewModel
-
     lateinit var adapter :  HeroesListAdapterMVVM
-
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         //inject()
