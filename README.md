@@ -9,4 +9,4 @@
 
 	(**IMPLEMENTADO**)	Tendrás que añadir una opción para marcar/desmarcar como favoritos a los súperheroes deMarvel y, mostrar dicha información en la vista.* **Opcionales (Bonus)**(**NO IMPLEMENTADO**)
 
-	A lo largo de esta semana quedará terminado.
+	Trataré de entragarlo más adelante.
